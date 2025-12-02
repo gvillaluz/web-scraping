@@ -1,6 +1,7 @@
 import requests as req
 from datetime import datetime, timedelta
 import pandas as pd
+import time
 
 url = 'https://pasig-marikina-tullahanffws.pagasa.dost.gov.ph/water/detail_list.do'
 
@@ -29,6 +30,8 @@ while current >= start_time:
         all_rows.extend(data)
 
     current -= timedelta(minutes=60)
+    
+    time.sleep(60)
 
 df = pd.DataFrame(all_rows)
 df.to_csv("historical_water_levels.csv", index=False)
